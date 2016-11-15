@@ -3,9 +3,12 @@ package fact.tree.lca;
 import java.util.Currency;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
+
+import fact.graph.GraphNode;
 
 /**
- * 
+ *
  * Represents the Binary Search Tree.
  */
 
@@ -52,6 +55,34 @@ public class BinaryTree {
 		}
 	}
 
+	public void DFS(Node node){
+	  Stack<Node> stack = new Stack<Node>();
+	  stack.push(node);
+
+    while(!stack.isEmpty()){
+      Node currNode = stack.pop();
+
+      System.out.println(currNode.value);
+
+      if(currNode.left !=null)
+        stack.push(currNode.left);
+
+      if(currNode.right !=null)
+        stack.push(currNode.right);
+    }
+
+	}
+
+	public void DFSRec(Node node){
+
+	  if(node != null){
+	    System.out.println(node.value);
+
+  	  DFSRec(node.right);
+  	  DFSRec(node.left);
+	  }
+	}
+
 	private void insertRec(Node latestRoot, Node node) {
 
 		if (latestRoot.left == null) {
@@ -75,7 +106,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * Returns the minimum value in the Binary Search Tree.
 	 */
 
@@ -99,7 +130,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * Returns the maximum value in the Binary Search Tree
 	 */
 
@@ -124,7 +155,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * Printing the contents of the tree in an inorder way.
 	 */
 
@@ -137,7 +168,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * Helper method to recursively print the contents in an inorder way
 	 */
 
@@ -158,7 +189,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * Printing the contents of the tree in a Preorder way.
 	 */
 
@@ -171,7 +202,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * Helper method to recursively print the contents in a Preorder way
 	 */
 
@@ -192,7 +223,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * Printing the contents of the tree in a Postorder way.
 	 */
 
@@ -205,7 +236,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * Helper method to recursively print the contents in a Postorder way
 	 */
 
