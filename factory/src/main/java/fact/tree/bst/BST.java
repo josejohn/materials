@@ -1,5 +1,8 @@
 package fact.tree.bst;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import fact.tree.lca.Node;
 
 public class BST {
@@ -16,6 +19,7 @@ public class BST {
     bst.insert(bst.root, new Node(3));
     bst.insert(bst.root, new Node(5));
     bst.insert(bst.root, new Node(7));
+    bst.insert(bst.root, new Node(8));
 
 
     System.out.print("inorder:");
@@ -30,12 +34,16 @@ public class BST {
     System.out.println();
     System.out.print("search:" +bst.search(bst.root, 5).value);
 
+//    System.out.println();
+//    bst.delete(bst.root, 4);
+//    System.out.print("inorder:");
+//    bst.inorder(bst.root);
+
     System.out.println();
-    bst.delete(bst.root, 4);
-    System.out.print("inorder:");
-    bst.inorder(bst.root);
+    System.out.print("maxdepth:"+bst.maxDepth(bst.root));
 
-
+    System.out.println();
+    System.out.print("depth:"+bst.depth(bst.root, 5));
 
   }
 
@@ -124,5 +132,49 @@ public class BST {
     preorder(root.right);
 
 
+  }
+
+  int maxDepth(Node node)
+  {
+      if (node == null)
+          return 0;
+      else
+      {
+          /* compute the depth of each subtree */
+          int lDepth = maxDepth(node.left);
+          int rDepth = maxDepth(node.right);
+
+          /* use the larger one */
+          if (lDepth > rDepth)
+              return (lDepth + 1);
+           else
+              return (rDepth + 1);
+      }
+  }
+
+  int depth(Node root, int value){
+    Node currNode = null;
+    if(root !=null){
+      Queue<Node> q = new LinkedList<Node>();
+
+
+      q.add(root);
+      root.distance = 0;
+      while(!q.isEmpty()){
+        currNode = q.poll();
+        if(currNode.value == value){
+          break;
+        }
+
+        if(currNode.left !=null){
+          currNode.left.distance = currNode.distance+1;
+          q.add(currNode.left);
+        }
+        if(currNode.right !=null)
+          currNode.right.distance = currNode.distance+1;
+          q.add(currNode.right);
+      }
+    }
+    return currNode.distance;
   }
 }

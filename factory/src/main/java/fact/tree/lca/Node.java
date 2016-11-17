@@ -3,6 +3,8 @@ public class Node {
 
   public int value;
 
+  public int distance;
+
   public Node left;
 
   public Node right;
