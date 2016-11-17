@@ -42,9 +42,14 @@ public class Graph {
 //        n7.setNeighbours(new GraphNode[] {n3, n4, n6});
 //        
         Graph graph = new Graph();
-//        graph.BFS(n1);
         
-//        graph.DFS(n1);
+        System.out.println("BFS: ");
+        graph.BFS(n1);
+        System.out.println();
+        System.out.println("DFS: ");  
+        graph.DFS(n1);
+        System.out.println();
+        System.out.println("DFSRec: ");
         graph.DFSRecursive(n1);
 	}
 	
@@ -53,14 +58,14 @@ public class Graph {
 		
 		node.setVisited(true);
 		queue.add(node);
-		System.out.println(node.getValue());
+		System.out.print(" "+node.getValue());
 		
 		while(!queue.isEmpty()){
 			GraphNode currNode = queue.poll();
 			
 			for(GraphNode neighbour: currNode.getNeighbours()){
 				if(!neighbour.getVisited()){
-					System.out.println(neighbour.getValue());
+					System.out.print(" "+neighbour.getValue());
 					queue.add(neighbour);
 					neighbour.setVisited(true);
 				}
@@ -77,7 +82,7 @@ public class Graph {
 			GraphNode currNode = stack.pop();
 			
 			if(!currNode.getVisited()){
-				System.out.println(currNode.getValue());
+				System.out.print(" "+currNode.getValue());
 				currNode.setVisited(true);
 				
 				for(GraphNode neighbour: currNode.getNeighbours()){
@@ -89,7 +94,7 @@ public class Graph {
 	
 	public void DFSRecursive(GraphNode node){
 		
-		System.out.println(node.getValue());
+		System.out.print(" "+node.getValue());
 		if(node.getNeighbours().length ==0)
 			return;
 		else{
