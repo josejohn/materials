@@ -1,5 +1,5 @@
 package fact.tree.lca;
-public class Node<T> {
+public class Node {
 
   public int value;
 

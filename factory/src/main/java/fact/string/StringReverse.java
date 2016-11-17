@@ -1,6 +1,6 @@
 package fact.string;
 
-public class SpringReverse {
+public class StringReverse {
 
 	public static void main(String[] args) {
 		System.out.println(reverseRecursively("jose"));
