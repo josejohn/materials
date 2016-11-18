@@ -43,7 +43,10 @@ public class BST {
     System.out.print("maxdepth:"+bst.maxDepth(bst.root));
 
     System.out.println();
-    System.out.print("depth:"+bst.depth(bst.root, 5));
+    System.out.print("depth:"+bst.depth(bst.root, 4));
+
+    System.out.println();
+    System.out.print("height:"+bst.height(bst.root, 4));
 
   }
 
@@ -130,8 +133,6 @@ public class BST {
     System.out.print(" "+root.value);
     preorder(root.left);
     preorder(root.right);
-
-
   }
 
   int maxDepth(Node node)
@@ -157,7 +158,6 @@ public class BST {
     if(root !=null){
       Queue<Node> q = new LinkedList<Node>();
 
-
       q.add(root);
       root.distance = 0;
       while(!q.isEmpty()){
@@ -170,11 +170,19 @@ public class BST {
           currNode.left.distance = currNode.distance+1;
           q.add(currNode.left);
         }
-        if(currNode.right !=null)
+        if(currNode.right !=null){
           currNode.right.distance = currNode.distance+1;
           q.add(currNode.right);
+        }
       }
     }
     return currNode.distance;
+  }
+
+  int height(Node node, int value){
+
+    Node currNode = search(node, value);
+    return (maxDepth(currNode)-1);
+
   }
 }
