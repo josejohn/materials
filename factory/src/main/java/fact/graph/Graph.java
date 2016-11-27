@@ -19,11 +19,11 @@ public class Graph {
         GraphNode n10 = new GraphNode(10);
         GraphNode n11 = new GraphNode(11);
         GraphNode n12 = new GraphNode(12);
-        
+
         n1.setNeighbours(new GraphNode[]{n2,n3,n4});
-        n2.setNeighbours(new GraphNode[]{n5,n6});
-        n3.setNeighbours(new GraphNode[]{});
-        n4.setNeighbours(new GraphNode[]{n7,n8});        
+        n2.setNeighbours(new GraphNode[]{n3,n5,n6});
+        n3.setNeighbours(new GraphNode[]{n2});
+        n4.setNeighbours(new GraphNode[]{n7,n8});
         n5.setNeighbours(new GraphNode[]{n9,n10});
         n6.setNeighbours(new GraphNode[]{});
         n7.setNeighbours(new GraphNode[]{n11, n12});
@@ -32,7 +32,7 @@ public class Graph {
         n10.setNeighbours(new GraphNode[]{});
         n11.setNeighbours(new GraphNode[]{});
         n12.setNeighbours(new GraphNode[]{});
- 
+
 //        n1.setNeighbours(new GraphNode[] {n2, n4, n5});
 //        n2.setNeighbours(new GraphNode[] {n1, n3, n4});
 //        n3.setNeighbours(new GraphNode[] {n2, n4, n7});
@@ -40,67 +40,72 @@ public class Graph {
 //        n5.setNeighbours(new GraphNode[] {n1, n4, n6});
 //        n6.setNeighbours(new GraphNode[] {n4, n5, n7});
 //        n7.setNeighbours(new GraphNode[] {n3, n4, n6});
-//        
+//
         Graph graph = new Graph();
-        
+
         System.out.println("BFS: ");
         graph.BFS(n1);
         System.out.println();
-        System.out.println("DFS: ");  
-        graph.DFS(n1);
+        System.out.println("DFS: ");
+//        graph.DFS(n1);
         System.out.println();
         System.out.println("DFSRec: ");
-        graph.DFSRecursive(n1);
+//        graph.DFSRecursive(n1);
 	}
-	
+
 	public void BFS(GraphNode node){
 		Queue<GraphNode> queue = new LinkedList<GraphNode>();
-		
-		node.setVisited(true);
+
+//		node.setVisited(true);
 		queue.add(node);
-		System.out.print(" "+node.getValue());
-		
+//		System.out.print(" "+node.getValue());
+
 		while(!queue.isEmpty()){
 			GraphNode currNode = queue.poll();
-			
+			if(!currNode.getVisited()){
+			  currNode.setVisited(true);
+			System.out.print(" "+currNode.getValue());
 			for(GraphNode neighbour: currNode.getNeighbours()){
-				if(!neighbour.getVisited()){
-					System.out.print(" "+neighbour.getValue());
+//				if(!neighbour.getVisited()){
+//					System.out.print(" "+neighbour.getValue());
 					queue.add(neighbour);
-					neighbour.setVisited(true);
+//					neighbour.setVisited(true);
 				}
 			}
 		}
 	}
-	
+
 	public void DFS(GraphNode node){
 		Stack<GraphNode> stack = new Stack<GraphNode>();
-		
+
 		stack.push(node);
-		
+
 		while(!stack.isEmpty()){
 			GraphNode currNode = stack.pop();
-			
+
 			if(!currNode.getVisited()){
 				System.out.print(" "+currNode.getValue());
 				currNode.setVisited(true);
-				
+
 				for(GraphNode neighbour: currNode.getNeighbours()){
 					stack.push(neighbour);
 				}
 			}
 		}
 	}
-	
+
 	public void DFSRecursive(GraphNode node){
-		
-		System.out.print(" "+node.getValue());
-		if(node.getNeighbours().length ==0)
-			return;
-		else{
-			for(GraphNode neighbour: node.getNeighbours()){
-				DFSRecursive(neighbour);
-			}
-		}
+
+	  if(!node.visited){
+  		System.out.print(" "+node.getValue());
+  		node.visited = true;
+  		if(node.getNeighbours().length ==0)
+  			return;
+  		else{
+  			for(GraphNode neighbour: node.getNeighbours()){
+  				DFSRecursive(neighbour);
+  			}
+  		}
+	  }
 	}
 }
