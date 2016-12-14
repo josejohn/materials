@@ -62,14 +62,14 @@ public class Graph {
 
 		while(!queue.isEmpty()){
 			GraphNode currNode = queue.poll();
-			if(!currNode.getVisited()){
-			  currNode.setVisited(true);
-			System.out.print(" "+currNode.getValue());
+//			if(!currNode.getVisited()){
+//			  currNode.setVisited(true);
+//			System.out.print(" "+currNode.getValue());
 			for(GraphNode neighbour: currNode.getNeighbours()){
-//				if(!neighbour.getVisited()){
-//					System.out.print(" "+neighbour.getValue());
+				if(!neighbour.getVisited()){
+					System.out.print(" "+neighbour.getValue());
 					queue.add(neighbour);
-//					neighbour.setVisited(true);
+					neighbour.setVisited(true);
 				}
 			}
 		}
